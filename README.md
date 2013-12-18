@@ -1,20 +1,14 @@
 # ZeroConf plugin for Cordova/Phonegap #
-By [Matt Kane](https://github.com/ascorbic) / [Triggertrap Ltd](https://github.com/triggertrap). 
 
-This plugin allows you to browse and publish ZeroConf/Bonjour/mDNS services.
-It depends on [the JmDNS library](http://jmdns.sourceforge.net/).
-
+This plugin allows you to browse and publish ZeroConf/Bonjour/mDNS services from applications developed using PhoneGap/Cordova 3.0 or newer. For older versions use [ZeroConf](https://github.com/purplecabbage/phonegap-plugins/tree/master/Android/ZeroConf).
 
 ## Adding the Plugin to your project ##
 
-1. To install the plugin, move ZeroConf.js to your project's www folder and include a reference to it in your html files.
-2. Create a folder called 'com/triggertrap/' within your project's src folder.
-3. And copy the ZeroConf.java file into that new folder.
-4. Download [the jmdns.jar file](https://github.com/twitwi/AndroidDnssdDemo/) 
-and add it to your project's build path. In Eclipse, do this by right-clicking on it and choosing "Add to build path".
-5. In your res/xml/plugins.xml file add the following line:
+In your application project directory:
 
-    `<plugin name="ZeroConf" value="com.triggertrap.ZeroConf"/>`
+```bash
+cordova plugins add https://github.com/vstirbu/ZeroConf
+```
 
 ## Using the plugin ##
 
@@ -61,26 +55,12 @@ see [the JmDNS docs](http://jmdns.sourceforge.net/apidocs/javax/jmdns/ServiceInf
 ### `unregister()`
 Unregisters all published services.
 	
+## Credits
+
+Original plugin [ZeroConf](https://github.com/purplecabbage/phonegap-plugins/tree/master/Android/ZeroConf) developed by [Matt Kane](https://github.com/ascorbic) / [Triggertrap Ltd](https://github.com/triggertrap).
+
+It depends on [the JmDNS library](http://jmdns.sourceforge.net/). Bundles [the jmdns.jar](https://github.com/twitwi/AndroidDnssdDemo/) library.
+
 ## Licence ##
 
 The MIT License
-
-Copyright © 2012 Triggertrap Ltd.
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
