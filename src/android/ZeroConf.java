@@ -1,7 +1,7 @@
 /**
  * ZeroConf plugin for Cordova/Phonegap
  *
- * Copyright 2013 Vlad Stirbu <vlad.stirbu@ieee.org>
+ * Copyright (c) 2013 Vlad Stirbu <vlad.stirbu@ieee.org>
  * Converted to Cordova 3.x
  * MIT License
  *
@@ -42,17 +42,25 @@ public class ZeroConf extends CordovaPlugin {
 		this.callback = callbackContext;
 
 		if (action.equals("watch")) {
-			String type = args.optString(0);
+			final String type = args.optString(0);
 			if (type != null) {
-				watch(type);
+				cordova.getThreadPool().execute(new Runnable() {
+					public void run() {
+						watch(type); // Thread-safe.
+					}
+				});
 			} else {
 				callbackContext.error("Service type not specified.");
 				return false;
 			}
 		} else if (action.equals("unwatch")) {
-			String type = args.optString(0);
+			final String type = args.optString(0);
 			if (type != null) {
-				unwatch(type);
+				cordova.getThreadPool().execute(new Runnable() {
+					public void run() {
+						unwatch(type);
+					}
+				});
 			} else {
 				callbackContext.error("Service type not specified.");
 				return false;
@@ -60,15 +68,19 @@ public class ZeroConf extends CordovaPlugin {
 		} else if (action.equals("register")) {
 			JSONObject obj = args.optJSONObject(0);
 			if (obj != null) {
-				String type = obj.optString("type");
-				String name = obj.optString("name");
-				int port = obj.optInt("port");
-				String text = obj.optString("text");
+				final String type = obj.optString("type");
+				final String name = obj.optString("name");
+				final int port = obj.optInt("port");
+				final String text = obj.optString("text");
 				if (type == null) {
 					callbackContext.error("Missing required service info.");
 					return false;
 				}
-				register(type, name, port, text);
+				cordova.getThreadPool().execute(new Runnable() {
+					public void run() {
+						register(type, name, port, text);
+					}
+				});
 			} else {
 				callbackContext.error("Missing required service info.");
 				return false;
