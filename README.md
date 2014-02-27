@@ -64,7 +64,3 @@ It depends on [the JmDNS library](http://jmdns.sourceforge.net/). Bundles [the j
 ## Licence ##
 
 The MIT License
-
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/vstirbu/zeroconf/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
