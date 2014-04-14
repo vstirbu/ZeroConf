@@ -1,8 +1,9 @@
 /**
  * ZeroConf plugin for Cordova/Phonegap
  *
- * Copyright (c) 2013 Vlad Stirbu <vlad.stirbu@ieee.org>
+ * Copyright (c) 2013-2014 Vlad Stirbu <vlad.stirbu@ieee.org>
  * Converted to Cordova 3.x
+ * Refactored initialization
  * MIT License
  *
  * @author Matt Kane
@@ -16,7 +17,9 @@ package com.triggertrap;
 import java.io.IOException;
 
 import org.apache.cordova.CallbackContext;
+import org.apache.cordova.CordovaInterface;
 import org.apache.cordova.CordovaPlugin;
+import org.apache.cordova.CordovaWebView;
 import org.apache.cordova.PluginResult;
 import org.apache.cordova.PluginResult.Status;
 import org.json.JSONArray;
@@ -38,7 +41,21 @@ public class ZeroConf extends CordovaPlugin {
 	private CallbackContext callback;
 
 	@Override
-	public boolean execute(String action, JSONArray args, CallbackContext callbackContext) {
+	public void initialize(CordovaInterface cordova, CordovaWebView webView) {
+		super.initialize(cordova, webView);
+
+		WifiManager wifi = (WifiManager) this.cordova.getActivity()
+				.getSystemService(android.content.Context.WIFI_SERVICE);
+		lock = wifi.createMulticastLock("ZeroConfPluginLock");
+		lock.setReferenceCounted(true);
+		lock.acquire();
+
+		Log.v("ZeroConf", "Initialized");
+	}
+
+	@Override
+	public boolean execute(String action, JSONArray args,
+			CallbackContext callbackContext) {
 		this.callback = callbackContext;
 
 		if (action.equals("watch")) {
@@ -147,11 +164,6 @@ public class ZeroConf extends CordovaPlugin {
 
 	private void setupWatcher() {
 		Log.d("ZeroConf", "Setup watcher");
-		WifiManager wifi = (WifiManager) this.cordova.getActivity()
-				.getSystemService(android.content.Context.WIFI_SERVICE);
-		lock = wifi.createMulticastLock("ZeroConfPluginLock");
-		lock.setReferenceCounted(true);
-		lock.acquire();
 		try {
 			jmdns = JmDNS.create();
 			listener = new ServiceListener() {
@@ -172,8 +184,7 @@ public class ZeroConf extends CordovaPlugin {
 					Log.d("ZeroConf", "Added");
 
 					// Force serviceResolved to be called again
-					jmdns.requestServiceInfo(event.getType(), event.getName(),
-							1);
+					jmdns.requestServiceInfo(event.getType(), event.getName(), 1);
 				}
 			};
 
