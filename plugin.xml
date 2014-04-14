@@ -29,7 +29,7 @@
             </feature>
         </config-file>
 
-        <source-file src="src/android/jmdns.jar" target-dir="libs" framework="true" />
+        <source-file src="src/android/libs/jmdns.jar" target-dir="libs" framework="true" />
         
         <source-file src="src/android/ZeroConf.java" target-dir="src/com/triggertrap" />
 
