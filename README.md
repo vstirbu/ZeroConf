@@ -2,6 +2,8 @@
 
 This plugin allows you to browse and publish ZeroConf/Bonjour/mDNS services from applications developed using PhoneGap/Cordova 3.0 or newer. For older versions use [ZeroConf](https://github.com/purplecabbage/phonegap-plugins/tree/master/Android/ZeroConf).
 
+[![GitHub version](https://badge.fury.io/gh/vstirbu%2FZeroConf.svg)](http://badge.fury.io/gh/vstirbu%2FZeroConf)
+
 ## Adding the Plugin to your project ##
 
 In your application project directory:
@@ -17,7 +19,7 @@ There are five static methods on the ZeroConf object, as follows:
 ### `watch(type, callback)`
 Note that `type` is a fully-qualified service type, including the domain, e.g. `"_http._tcp.local."`
 
-`callback` is a function that is called when services are added and removed. The function is passed 
+`callback` is a function that is called when services are added and removed. The function is passed
 an object with the following structure:
 
 ```javascript
@@ -49,12 +51,12 @@ Stops watching for services of the specified type.
 Closes the service browser and stops watching.
 
 ### `register(type, name, port, text)`
-Publishes a new service. The fields are as in the structure above. For more information, 
+Publishes a new service. The fields are as in the structure above. For more information,
 see [the JmDNS docs](http://jmdns.sourceforge.net/apidocs/javax/jmdns/ServiceInfo.html).
 
 ### `unregister()`
 Unregisters all published services.
-	
+
 ## Credits
 
 Original plugin [ZeroConf](https://github.com/purplecabbage/phonegap-plugins/tree/master/Android/ZeroConf) developed by [Matt Kane](https://github.com/ascorbic) / [Triggertrap Ltd](https://github.com/triggertrap).

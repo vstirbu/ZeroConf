@@ -2,27 +2,27 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
         xmlns:android="http://schemas.android.com/apk/res/android"
         id="com.triggertrap.ZeroConf"
-        version="1.0.2">
+        version="1.0.3">
     <engines>
         <engine name="cordova" version=">=3.0.0" />
     </engines>
-  
+
     <name>ZeroConf</name>
     <description>ZeroConf plugin for Cordova/Phonegap</description>
     <author>Vlad Stirbu</author>
     <keywords>zeroconf</keywords>
     <license>MIT</license>
-  
+
     <js-module src="www/ZeroConf.js" name="zeroconf">
         <clobbers target="ZeroConf" />
     </js-module>
 
     <platform name="android">
-      
+
         <config-file target="AndroidManifest.xml" parent="/manifest">
             <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE"/>
         </config-file>
-      
+
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="ZeroConf">
                 <param name="android-package" value="com.triggertrap.ZeroConf" />
@@ -31,7 +31,7 @@
         </config-file>
 
         <source-file src="src/android/libs/jmdns.jar" target-dir="libs" framework="true" />
-        
+
         <source-file src="src/android/ZeroConf.java" target-dir="src/com/triggertrap" />
 
     </platform>
