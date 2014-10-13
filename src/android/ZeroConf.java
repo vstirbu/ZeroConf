@@ -9,12 +9,13 @@
  * @author Matt Kane
  * Copyright (c) Triggertrap Ltd. 2012. All Rights Reserved.
  * Available under the terms of the MIT License.
- * 
+ *
  */
 
 package com.triggertrap;
 
 import java.io.IOException;
+import java.net.InetAddress;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaInterface;
@@ -43,12 +44,23 @@ public class ZeroConf extends CordovaPlugin {
 	@Override
 	public void initialize(CordovaInterface cordova, CordovaWebView webView) {
 		super.initialize(cordova, webView);
+		InetAddress addr;
+		int intaddr;
 
 		WifiManager wifi = (WifiManager) this.cordova.getActivity()
 				.getSystemService(android.content.Context.WIFI_SERVICE);
 		lock = wifi.createMulticastLock("ZeroConfPluginLock");
 		lock.setReferenceCounted(true);
 		lock.acquire();
+
+		try {
+			intaddr = wifi.getConnectionInfo().getIpAddress();
+			byte[] byteaddr = new byte[] { (byte) (intaddr & 0xff), (byte) (intaddr >> 8 & 0xff), (byte) (intaddr >> 16 & 0xff), (byte) (intaddr >> 24 & 0xff) };
+			addr = InetAddress.getByAddress(byteaddr);
+			Log.v("ZeroConf", addr.getHostAddress());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 		Log.v("ZeroConf", "Initialized");
 	}
