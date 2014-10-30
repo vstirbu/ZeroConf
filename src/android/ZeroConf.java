@@ -31,6 +31,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.triggertrap.ZeroConf;
+
 import android.net.wifi.WifiManager;
 import android.util.Log;
 
@@ -170,7 +172,7 @@ public class ZeroConf extends CordovaPlugin {
 	private void setupWatcher() {
 		Log.d("ZeroConf", "Setup watcher");
 		try {
-			jmdns = JmDNS.create(getIPAddress(), "ZeroConf");
+			jmdns = JmDNS.create(ZeroConf.getIPAddress(), "ZeroConf");
 			listener = new ServiceListener() {
 
 				public void serviceResolved(ServiceEvent ev) {
