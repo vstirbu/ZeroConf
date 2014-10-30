@@ -15,6 +15,10 @@
 package com.triggertrap;
 
 import java.io.IOException;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.util.Collections;
+import java.util.List;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaInterface;
@@ -22,6 +26,7 @@ import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CordovaWebView;
 import org.apache.cordova.PluginResult;
 import org.apache.cordova.PluginResult.Status;
+import org.apache.http.conn.util.InetAddressUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -165,7 +170,7 @@ public class ZeroConf extends CordovaPlugin {
 	private void setupWatcher() {
 		Log.d("ZeroConf", "Setup watcher");
 		try {
-			jmdns = JmDNS.create();
+			jmdns = JmDNS.create(getIPAddress(), "ZeroConf");
 			listener = new ServiceListener() {
 
 				public void serviceResolved(ServiceEvent ev) {
@@ -204,7 +209,7 @@ public class ZeroConf extends CordovaPlugin {
 			PluginResult result = new PluginResult(PluginResult.Status.OK,
 					status);
 			result.setKeepCallback(true);
-			//this.callback.success(status);
+			// this.callback.success(status);
 			this.callback.sendPluginResult(result);
 
 		} catch (JSONException e) {
@@ -248,6 +253,33 @@ public class ZeroConf extends CordovaPlugin {
 
 		return obj;
 
+	}
+
+	/**
+	 * Returns the first found IP4 address.
+	 * 
+	 * @return the first found IP4 address
+	 */
+	public static InetAddress getIPAddress() {
+		try {
+			List<NetworkInterface> interfaces = Collections
+					.list(NetworkInterface.getNetworkInterfaces());
+			for (NetworkInterface intf : interfaces) {
+				List<InetAddress> addrs = Collections.list(intf
+						.getInetAddresses());
+				for (InetAddress addr : addrs) {
+					if (!addr.isLoopbackAddress()) {
+						String sAddr = addr.getHostAddress().toUpperCase();
+						if (InetAddressUtils.isIPv4Address(sAddr)) {
+							return addr;
+						}
+					}
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }
