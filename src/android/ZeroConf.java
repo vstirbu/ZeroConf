@@ -172,7 +172,7 @@ public class ZeroConf extends CordovaPlugin {
 	private void setupWatcher() {
 		Log.d("ZeroConf", "Setup watcher");
 		try {
-			jmdns = JmDNS.create(ZeroConf.getIPAddress(), "ZeroConf");
+			jmdns = JmDNS.create(ZeroConf.getIPAddress());
 			listener = new ServiceListener() {
 
 				public void serviceResolved(ServiceEvent ev) {
