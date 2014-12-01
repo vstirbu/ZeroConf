@@ -1,0 +1,15 @@
+{
+  "name": "zeroconf-test",
+  "version": "0.0.1",
+  "description": "Test application for ZeroConf plugin",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Vlad Stirbu",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "mdns": "^2.2.2"
+  }
+}
