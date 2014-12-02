@@ -124,6 +124,26 @@ public class ZeroConf extends CordovaPlugin {
 				jmdns.unregisterAllServices();
 			}
 
+        } else if (action.equals("list")) {
+            JSONObject obj = args.optJSONObject(0);
+            if (obj != null) {
+	            final String type = obj.optString("type");
+    	        final int timeout = obj.optInt("timeout");
+            	if (type != null) {
+                	cordova.getThreadPool().execute(new Runnable() {
+                    	public void run() {
+                        	list(type, timeout); // Thread-safe.
+                    	}
+                	});
+            	} else {
+                	callbackContext.error("Service type not specified.");
+                	return false;
+            	}
+            } else {
+                callbackContext.error("Missing required parameter: type, timeout.");
+                return false;
+
+            }
 		} else {
 			Log.e("ZeroConf", "Invalid action: " + action);
 			callbackContext.error("Invalid action.");
@@ -168,6 +188,17 @@ public class ZeroConf extends CordovaPlugin {
 			e.printStackTrace();
 		}
 	}
+
+    private void list(String type, int timeout) {
+        try {
+            JmDNS mdnsQuery = JmDNS.create(ZeroConf.getIPAddress());
+            ServiceInfo[] services = mdnsQuery.list(type, timeout);
+            sendListCallback("list", services);
+            mdnsQuery.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 	private void setupWatcher() {
 		Log.d("ZeroConf", "Setup watcher");
@@ -220,6 +251,27 @@ public class ZeroConf extends CordovaPlugin {
 		}
 
 	}
+
+    public void sendListCallback(String action, ServiceInfo[] services) {
+        JSONObject status = new JSONObject();
+        try {
+            status.put("action", action);
+            for (ServiceInfo service : services) {
+                status.put("service", jsonifyService(service));
+            }
+            Log.d("ZeroConf", "Sending result: " + status.toString());
+
+            PluginResult result = new PluginResult(PluginResult.Status.OK, status);
+            result.setKeepCallback(true);
+            // this.callback.success(status);
+            this.callback.sendPluginResult(result);
+
+        } catch (JSONException e) {
+
+            e.printStackTrace();
+        }
+
+    }
 
 	public static JSONObject jsonifyService(ServiceInfo info) {
 		JSONObject obj = new JSONObject();
