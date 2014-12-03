@@ -9,6 +9,8 @@
  * @author Matt Kane
  * Copyright (c) Triggertrap Ltd. 2012. All Rights Reserved.
  * Available under the terms of the MIT License.
+ *
+ * TODO take a look at Android NsdManager class...
  * 
  */
 
@@ -30,8 +32,6 @@ import org.apache.http.conn.util.InetAddressUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import com.triggertrap.ZeroConf;
 
 import android.net.wifi.WifiManager;
 import android.util.Log;
