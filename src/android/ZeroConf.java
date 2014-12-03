@@ -125,24 +125,18 @@ public class ZeroConf extends CordovaPlugin {
 			}
 
         } else if (action.equals("list")) {
-            JSONObject obj = args.optJSONObject(0);
-            if (obj != null) {
-	            final String type = obj.optString("type");
-    	        final int timeout = obj.optInt("timeout");
-            	if (type != null) {
-                	cordova.getThreadPool().execute(new Runnable() {
-                    	public void run() {
-                        	list(type, timeout); // Thread-safe.
-                    	}
-                	});
-            	} else {
-                	callbackContext.error("Service type not specified.");
-                	return false;
-            	}
+            final String type = args.optString(0);
+            final int timeout = args.optInt(1);
+            if (type != null && timeout > 0) {
+                cordova.getThreadPool().execute(new Runnable() {
+                    public void run() {
+                        list(type, timeout); // Thread-safe.
+                    }
+                });
             } else {
                 callbackContext.error("Missing required parameter: type, timeout.");
                 return false;
-
+            
             }
 		} else {
 			Log.e("ZeroConf", "Invalid action: " + action);
