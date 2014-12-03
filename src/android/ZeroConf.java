@@ -257,7 +257,7 @@ public class ZeroConf extends CordovaPlugin {
             Log.d("ZeroConf", "Sending result: " + status.toString());
 
             PluginResult result = new PluginResult(PluginResult.Status.OK, status);
-            //result.setKeepCallback(true);
+            result.setKeepCallback(true);
             this.callback.sendPluginResult(result);
 
         } catch (JSONException e) {
