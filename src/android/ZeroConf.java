@@ -236,7 +236,6 @@ public class ZeroConf extends CordovaPlugin {
 			PluginResult result = new PluginResult(PluginResult.Status.OK,
 					status);
 			result.setKeepCallback(true);
-			// this.callback.success(status);
 			this.callback.sendPluginResult(result);
 
 		} catch (JSONException e) {
@@ -250,14 +249,15 @@ public class ZeroConf extends CordovaPlugin {
         JSONObject status = new JSONObject();
         try {
             status.put("action", action);
+            JSONArray array = new JSONArray();
             for (ServiceInfo service : services) {
-                status.put("service", jsonifyService(service));
+                array.put("service", jsonifyService(service));
             }
+            status.put("service", status);
             Log.d("ZeroConf", "Sending result: " + status.toString());
 
             PluginResult result = new PluginResult(PluginResult.Status.OK, status);
-            result.setKeepCallback(true);
-            // this.callback.success(status);
+            //result.setKeepCallback(true);
             this.callback.sendPluginResult(result);
 
         } catch (JSONException e) {
