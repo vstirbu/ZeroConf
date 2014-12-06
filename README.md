@@ -57,6 +57,9 @@ see [the JmDNS docs](http://jmdns.sourceforge.net/apidocs/javax/jmdns/ServiceInf
 ### `unregister()`
 Unregisters all published services.
 
+### `list(type, timeout, success, error)`
+List all published services, search for timeout (in ms). The fields are as in the structure above.
+
 ## Credits
 
 Original plugin [ZeroConf](https://github.com/purplecabbage/phonegap-plugins/tree/master/Android/ZeroConf) developed by [Matt Kane](https://github.com/ascorbic) / [Triggertrap Ltd](https://github.com/triggertrap).

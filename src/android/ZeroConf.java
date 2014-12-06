@@ -9,6 +9,8 @@
  * @author Matt Kane
  * Copyright (c) Triggertrap Ltd. 2012. All Rights Reserved.
  * Available under the terms of the MIT License.
+ *
+ * TODO take a look at Android NsdManager class...
  * 
  */
 
@@ -30,8 +32,6 @@ import org.apache.http.conn.util.InetAddressUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import com.triggertrap.ZeroConf;
 
 import android.net.wifi.WifiManager;
 import android.util.Log;
@@ -124,6 +124,20 @@ public class ZeroConf extends CordovaPlugin {
 				jmdns.unregisterAllServices();
 			}
 
+        } else if (action.equals("list")) {
+            final String type = args.optString(0);
+            final int timeout = args.optInt(1);
+            if (type != null && timeout > 0) {
+                cordova.getThreadPool().execute(new Runnable() {
+                    public void run() {
+                        list(type, timeout); // Thread-safe.
+                    }
+                });
+            } else {
+                callbackContext.error("Missing required parameter: type, timeout.");
+                return false;
+            
+            }
 		} else {
 			Log.e("ZeroConf", "Invalid action: " + action);
 			callbackContext.error("Invalid action.");
@@ -169,6 +183,17 @@ public class ZeroConf extends CordovaPlugin {
 		}
 	}
 
+    private void list(String type, int timeout) {
+        try {
+            JmDNS mdnsQuery = JmDNS.create(ZeroConf.getIPAddress());
+            ServiceInfo[] services = mdnsQuery.list(type, timeout);
+            sendListCallback("list", services);
+            mdnsQuery.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 	private void setupWatcher() {
 		Log.d("ZeroConf", "Setup watcher");
 		try {
@@ -211,7 +236,6 @@ public class ZeroConf extends CordovaPlugin {
 			PluginResult result = new PluginResult(PluginResult.Status.OK,
 					status);
 			result.setKeepCallback(true);
-			// this.callback.success(status);
 			this.callback.sendPluginResult(result);
 
 		} catch (JSONException e) {
@@ -220,6 +244,28 @@ public class ZeroConf extends CordovaPlugin {
 		}
 
 	}
+
+    public void sendListCallback(String action, ServiceInfo[] services) {
+        JSONObject status = new JSONObject();
+        try {
+            status.put("action", action);
+        	JSONArray array = new JSONArray();
+        	for (ServiceInfo service : services) {
+        	    array.put(jsonifyService(service));
+    	    }
+	        status.put("service", array);
+            Log.d("ZeroConf", "Sending result: " + status.toString());
+
+            PluginResult result = new PluginResult(PluginResult.Status.OK, status);
+            result.setKeepCallback(true);
+            this.callback.sendPluginResult(result);
+
+        } catch (JSONException e) {
+
+            e.printStackTrace();
+        }
+
+    }
 
 	public static JSONObject jsonifyService(ServiceInfo info) {
 		JSONObject obj = new JSONObject();

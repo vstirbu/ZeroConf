@@ -40,7 +40,10 @@ var ZeroConf = {
 	unregister: function () {
 		return exec(null, ZeroConf.fail, "ZeroConf", "unregister", []);
 	},
-	fail: function (o) {
+        list: function(type, timeout, success, failure) {
+                return exec(success, failure, "ZeroConf", "list", [type, timeout]);
+        },
+    	fail: function (o) {
 		console.error("Error " + JSON.stringify(o));
 	}
 };
