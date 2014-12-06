@@ -14,7 +14,7 @@ cordova plugins add https://github.com/vstirbu/ZeroConf
 
 ## Using the plugin ##
 
-There are five static methods on the ZeroConf object, as follows:
+There are six static methods on the ZeroConf object, as follows:
 
 ### `watch(type, callback)`
 Note that `type` is a fully-qualified service type, including the domain, e.g. `"_http._tcp.local."`
