@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        id="com.triggertrap.ZeroConf"
-        version="1.1.0">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    id="com.triggertrap.ZeroConf"
+    version="1.1.0">
     <engines>
         <engine name="cordova" version=">=3.0.0" />
     </engines>
@@ -18,24 +18,31 @@
     </js-module>
 
     <platform name="android">
-
         <config-file target="AndroidManifest.xml" parent="/manifest">
             <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE"/>
             <uses-permission android:name="android.permission.INTERNET" />
-			<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+            <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
         </config-file>
-
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="ZeroConf">
                 <param name="android-package" value="com.triggertrap.ZeroConf" />
                 <param name="onload" value="true" />
             </feature>
         </config-file>
-
         <source-file src="src/android/libs/jmdns.jar" target-dir="libs" framework="true" />
-
         <source-file src="src/android/ZeroConf.java" target-dir="src/com/triggertrap" />
-
     </platform>
+
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="ZeroConf">
+                <param name="ios-package" value="ZeroConf"/>
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+        <header-file src="src/ios/ZeroConf.h" />
+        <source-file src="src/ios/ZeroConf.m" />
+    </platform>
+
     <info></info>
 </plugin>
