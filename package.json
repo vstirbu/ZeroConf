@@ -1,0 +1,31 @@
+{
+  "name": "cordova-zeroconf-plugin",
+  "version": "1.2.0",
+  "description": "ZeroConf plugin for Cordova/Phonegap",
+  "cordova": {
+    "id": "cordova-zeroconf-plugin",
+    "platforms": [
+      "android"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vstirbu/ZeroConf.git"
+  },
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-android"
+  ],
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=3.0.0"
+    }
+  ],
+  "author": "Vlad Stirbu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vstirbu/ZeroConf/issues"
+  },
+  "homepage": "https://github.com/vstirbu/ZeroConf"
+}

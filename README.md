@@ -6,10 +6,16 @@ This plugin allows you to browse and publish ZeroConf/Bonjour/mDNS services from
 
 ## Adding the Plugin to your project ##
 
-In your application project directory:
+In your application project directory, if you use `cordova-cli` newer then 5.0:
 
 ```bash
-cordova plugins add https://github.com/vstirbu/ZeroConf
+cordova plugin add cordova-zeroconf-plugin
+```
+
+or, for older versions:
+
+```bash
+cordova plugin add https://github.com/vstirbu/ZeroConf
 ```
 
 ## Using the plugin ##
