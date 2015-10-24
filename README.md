@@ -70,7 +70,7 @@ List all published services, search for timeout (in ms). The fields are as in th
 
 Original plugin [ZeroConf](https://github.com/purplecabbage/phonegap-plugins/tree/master/Android/ZeroConf) developed by [Matt Kane](https://github.com/ascorbic) / [Triggertrap Ltd](https://github.com/triggertrap).
 
-It depends on [the JmDNS library](http://jmdns.sourceforge.net/). Bundles [the jmdns.jar](https://github.com/twitwi/AndroidDnssdDemo/) library.
+It depends on [the JmDNS library](http://jmdns.sourceforge.net/).
 
 ## Licence ##
 
