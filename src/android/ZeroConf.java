@@ -11,7 +11,7 @@
  * Available under the terms of the MIT License.
  *
  * TODO take a look at Android NsdManager class...
- * 
+ *
  */
 
 package com.triggertrap;
@@ -90,16 +90,12 @@ public class ZeroConf extends CordovaPlugin {
 				return false;
 			}
 		} else if (action.equals("register")) {
-			JSONObject obj = args.optJSONObject(0);
-			if (obj != null) {
-				final String type = obj.optString("type");
-				final String name = obj.optString("name");
-				final int port = obj.optInt("port");
-				final String text = obj.optString("text");
-				if (type == null) {
-					callbackContext.error("Missing required service info.");
-					return false;
-				}
+			final String type = args.optString(0);
+			final String name = args.optString(1);
+			final int port = args.optInt(2);
+			final String text = args.optString(3);
+
+			if (type != null) {
 				cordova.getThreadPool().execute(new Runnable() {
 					public void run() {
 						register(type, name, port, text);
@@ -108,7 +104,6 @@ public class ZeroConf extends CordovaPlugin {
 			} else {
 				callbackContext.error("Missing required service info.");
 				return false;
-
 			}
 
 		} else if (action.equals("close")) {
@@ -136,7 +131,7 @@ public class ZeroConf extends CordovaPlugin {
             } else {
                 callbackContext.error("Missing required parameter: type, timeout.");
                 return false;
-            
+
             }
 		} else {
 			Log.e("ZeroConf", "Invalid action: " + action);
@@ -176,6 +171,9 @@ public class ZeroConf extends CordovaPlugin {
 		}
 
 		try {
+			if (jmdns == null) {
+				jmdns = JmDNS.create(ZeroConf.getIPAddress());
+			}
 			ServiceInfo service = ServiceInfo.create(type, name, port, text);
 			jmdns.registerService(service);
 		} catch (IOException e) {
@@ -305,7 +303,7 @@ public class ZeroConf extends CordovaPlugin {
 
 	/**
 	 * Returns the first found IP4 address.
-	 * 
+	 *
 	 * @return the first found IP4 address
 	 */
 	public static InetAddress getIPAddress() {
