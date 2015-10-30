@@ -1,20 +1,11 @@
-/**
- * ZeroConf plugin for Cordova/Phonegap
+/*
+ * Cordova ZeroConf Plugin
  *
- * Copyright (c) 2013-2014 Vlad Stirbu <vlad.stirbu@ieee.org>
- * Converted to Cordova 3.x
- * Refactored initialization
- * MIT License
- *
- * @author Matt Kane
- * Copyright (c) Triggertrap Ltd. 2012. All Rights Reserved.
- * Available under the terms of the MIT License.
- *
- * TODO take a look at Android NsdManager class...
- * 
+ * ZeroConf plugin for Cordova/Phonegap 
+ * by Cambio Creative
  */
 
-package com.triggertrap;
+package com.cambiocreative;
 
 import java.io.IOException;
 import java.net.InetAddress;

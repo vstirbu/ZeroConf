@@ -1,5 +1,8 @@
-/*
- * Based on 'Bonjour DNS-SD plugin for Cordova.' by jarnoh@komplex.org - March 2012
+/**
+ * Cordova ZeroConf Plugin
+ *
+ * ZeroConf plugin for Cordova/Phonegap 
+ * by Cambio Creative
  */
 
 #import "ZeroConf.h"

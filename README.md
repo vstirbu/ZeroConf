@@ -1,15 +1,14 @@
 # ZeroConf plugin for Cordova/Phonegap #
 
-This plugin allows you to browse and publish ZeroConf/Bonjour/mDNS services from applications developed using PhoneGap/Cordova 3.0 or newer. For older versions use [ZeroConf](https://github.com/purplecabbage/phonegap-plugins/tree/master/Android/ZeroConf).
+This plugin allows you to browse and publish ZeroConf/Bonjour/mDNS services from applications developed using PhoneGap/Cordova 3.0 or newer.
 
-[![GitHub version](https://badge.fury.io/gh/vstirbu%2FZeroConf.svg)](http://badge.fury.io/gh/vstirbu%2FZeroConf)
 
 ## Adding the Plugin to your project ##
 
 In your application project directory:
 
 ```bash
-cordova plugins add https://github.com/vstirbu/ZeroConf
+cordova plugins add https://github.com/cambiocreative/cordova-plugin-zeroconf
 ```
 
 ## Using the plugin ##
@@ -61,8 +60,6 @@ Unregisters all published services.
 List all published services, search for timeout (in ms). The fields are as in the structure above.
 
 ## Credits
-
-Original plugin [ZeroConf](https://github.com/purplecabbage/phonegap-plugins/tree/master/Android/ZeroConf) developed by [Matt Kane](https://github.com/ascorbic) / [Triggertrap Ltd](https://github.com/triggertrap).
 
 It depends on [the JmDNS library](http://jmdns.sourceforge.net/). Bundles [the jmdns.jar](https://github.com/twitwi/AndroidDnssdDemo/) library.
 

@@ -1,17 +1,10 @@
-/**
- * ZeroConf plugin for Cordova/Phonegap
+/*
+ * Cordova ZeroConf Plugin
  *
- * Copyright (c) 2013 Vlad Stirbu <vlad.stirbu@ieee.org> Converted to Cordova 3.0 format
- * MIT license
- *
- * @author Matt Kane
- * Copyright (c) Triggertrap Ltd. 2012. All Rights Reserved.
- * Available under the terms of the MIT License.
- * 
+ * ZeroConf plugin for Cordova/Phonegap 
+ * by Cambio Creative
  */
 
-/*global module, console, require*/
-/*jshint -W097 */
 'use strict';
 var exec = require('cordova/exec');
 

@@ -1,0 +1,30 @@
+{
+  "name": "com.cambiocreative.cordova.plugin.zeroconf",
+  "version": "1.0.1",
+  "description": "ZeroConf plugin for Cordova/Phonegap",
+  "cordova": {
+    "id": "com.cambiocreative.cordova.plugin.zeroconf",
+    "platforms": [
+      "android"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cambiocreative/cordova-plugin-zeroconf.git"
+  },
+  "keywords": [
+    "cordova-android"
+  ],
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=3.0.0"
+    }
+  ],
+  "author": "Osmond van Hemert",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cambiocreative/cordova-plugin-zeroconf/issues"
+  },
+  "homepage": "https://github.com/cambiocreative/cordova-plugin-zeroconf"
+}
