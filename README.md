@@ -15,7 +15,7 @@ cordova plugin add cordova-zeroconf-plugin
 or, for older versions:
 
 ```bash
-cordova plugin add https://github.com/vstirbu/ZeroConf
+cordova plugin add https://github.com/vstirbu/ZeroConf@1.1.1
 ```
 
 ## Using the plugin ##
