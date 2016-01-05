@@ -5,6 +5,7 @@
   "cordova": {
     "id": "cordova-zeroconf-plugin",
     "platforms": [
+      "ios",
       "android"
     ]
   },
@@ -22,7 +23,7 @@
       "version": ">=3.0.0"
     }
   ],
-  "author": "Vlad Stirbu",
+  "author": "Vlad Stirbu, Jonas Schnelli",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/vstirbu/ZeroConf/issues"
