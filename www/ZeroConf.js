@@ -16,13 +16,13 @@
 var exec = require('cordova/exec');
 
 var ZeroConf = {
-	watch: function (type, callback) {
+	watch: function (service, domain, callback) {
 		return exec(function (result) {
 			if (callback) {
 				callback(result);
 			}
 
-		}, ZeroConf.fail, "ZeroConf", "watch", [type]);
+		}, ZeroConf.fail, "ZeroConf", "watch", [service, domain]);
 	},
 	unwatch: function (type) {
 		return exec(null, ZeroConf.fail, "ZeroConf", "unwatch", [type]);

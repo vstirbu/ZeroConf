@@ -66,11 +66,12 @@ public class ZeroConf extends CordovaPlugin {
 		this.callback = callbackContext;
 
 		if (action.equals("watch")) {
-			final String type = args.optString(0);
-			if (type != null) {
+			final String service = args.optString(0);
+			final String domain = args.optString(1);
+			if (service != null) {
 				cordova.getThreadPool().execute(new Runnable() {
 					public void run() {
-						watch(type); // Thread-safe.
+						watch(service+domain); // Thread-safe.
 					}
 				});
 			} else {

@@ -15,15 +15,17 @@ cordova plugin add cordova-zeroconf-plugin
 or, for older versions:
 
 ```bash
-cordova plugin add https://github.com/vstirbu/ZeroConf@1.1.1
+cordova plugin add https://github.com/vstirbu/ZeroConf@1.3.0
 ```
 
 ## Using the plugin ##
 
 There are six static methods on the ZeroConf object, as follows:
 
-### `watch(type, callback)`
-Note that `type` is a fully-qualified service type, including the domain, e.g. `"_http._tcp.local."`
+### `watch(service, domain, callback)`
+Note that `service` is a fully-qualified service type, e.g. `"_http._tcp."`
+
+As `domain` consider using `local.` (dot at the end!)
 
 `callback` is a function that is called when services are added and removed. The function is passed
 an object with the following structure:
@@ -32,13 +34,13 @@ an object with the following structure:
 {
 	"service": {
 		"port": 50930,
-		"protocol": "tcp",
-		"application": "http",
-		"urls": ["http://192.168.2.2:50930", "http://fe80::7256:81ff:fe00:99e3:50930"],
-		"description": "\\00",
-		"name": "Black iPod",
+		"protocol": "tcp", #android only
+		"application": "http", #android only
+		"urls": ["http://192.168.2.2:50930", "http://fe80::7256:81ff:fe00:99e3:50930"], ##android only
+		"description": "\\00", ##android only
+		"name": "Black iPod", 
 		"domain": "local",
-		"server": "",
+		"server": "", ##android only
 		"addresses": ["192.168.2.2", "fe80::7256:81ff:fe00:99e3"],
 		"type": "_http._tcp.local.",
 		"qualifiedname": "Black iPod._http._tcp.local."
