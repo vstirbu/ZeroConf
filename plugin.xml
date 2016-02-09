@@ -35,6 +35,7 @@
         <framework src="javax.jmdns:jmdns:+"/>
 
         <source-file src="src/android/ZeroConf.java" target-dir="src/com/triggertrap" />
+        <source-file src="src/android/libs/org.apache.http.legacy.jar" target-dir="libs" framework="true" />
 
     </platform>
     <info></info>
