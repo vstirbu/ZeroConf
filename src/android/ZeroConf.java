@@ -148,10 +148,13 @@ public class ZeroConf extends CordovaPlugin {
 		if (jmdns == null) {
 			setupWatcher();
 		}
-		Log.d("ZeroConf", "Watch " + type);
-		Log.d("ZeroConf",
-				"Name: " + jmdns.getName() + " host: " + jmdns.getHostName());
-		jmdns.addServiceListener(type, listener);
+		try {
+			Log.d("ZeroConf", "Watch " + type);
+			Log.d("ZeroConf", "Name: " + jmdns.getName() + " host: " + jmdns.getHostName());
+			jmdns.addServiceListener(type, listener);
+		} catch (Exception e) {
+			this.callback.error("Cannot setup watcher");
+		}
 	}
 
 	private void unwatch(String type) {
@@ -178,6 +181,7 @@ public class ZeroConf extends CordovaPlugin {
 			jmdns.registerService(service);
 		} catch (IOException e) {
 			e.printStackTrace();
+			this.callback.error("Cannot register service");
 		}
 	}
 
@@ -189,6 +193,7 @@ public class ZeroConf extends CordovaPlugin {
             mdnsQuery.close();
         } catch (IOException e) {
             e.printStackTrace();
+            this.callback.error("Cannot list services");
         }
     }
 
