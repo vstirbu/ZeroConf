@@ -108,11 +108,8 @@ public class ZeroConf extends CordovaPlugin {
 
 		} else if (action.equals("close")) {
 			if (jmdns != null) {
-				try {
-					jmdns.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+				cordova.getThreadPool().execute(new CloseTask(jmdns));
+				jmdns = null;
 			}
 		} else if (action.equals("unregister")) {
 			if (jmdns != null) {
@@ -332,5 +329,21 @@ public class ZeroConf extends CordovaPlugin {
 		}
 		return null;
 	}
+	
+	private class CloseTask implements Runnable {
+		private final JmDNS jmdnsToClose;
 
+		CloseTask(JmDNS jmdns) {
+			this.jmdnsToClose = jmdns;
+		}
+
+		@Override
+		public void run() {
+			try {
+				this.jmdnsToClose.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 }
